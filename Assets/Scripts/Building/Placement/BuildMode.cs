@@ -24,29 +24,23 @@ public class BuildMode : MonoSingleton<BuildMode>
 
         if(modeActive)
         {
-            //CurrentBuildGrid.NodesHolder.gameObject.SetActive(true);//TOGGLE
             BuildModeActivated?.Invoke();
         }
         else
         {
-            //CurrentBuildGrid.NodesHolder.gameObject.SetActive(false);
             DestroyPlacementObj?.Invoke();
         }
     }
 
     public void TurnOffBuildMode()
     {
-        if (modeActive == false)
-            return;
-        else
+        if (modeActive)
             SwitchBuildingMode();
     }
 
     public void TurnOnBuildMode()
     {
-        if (modeActive)
-            return;
-        else
+        if (modeActive == false)
             SwitchBuildingMode();
     }
 }

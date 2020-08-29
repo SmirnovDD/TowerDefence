@@ -68,9 +68,9 @@ namespace Pathfinding
         {
             if (Nodes == null)
                 return;
-            Gizmos.color = Color.green;
             foreach(var n in Nodes)
             {
+                Gizmos.color = n.Walkable ? Color.green : Color.red;
                 Gizmos.DrawCube(n.Position, new Vector3(1,0.1f,1) * _nodeDiameter);
             }
         }

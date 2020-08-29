@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154cf714de84df44592758e67f91bee1, type: 3}
   m_Name: Grid Info
   m_EditorClassIdentifier: 
-  CellRadius: 1
+  CellRadius: 0.5
   WalkableLayer:
     serializedVersion: 2
     m_Bits: 256

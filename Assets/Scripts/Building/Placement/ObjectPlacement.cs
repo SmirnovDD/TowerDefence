@@ -41,7 +41,7 @@ public class ObjectPlacement : MonoBehaviour
     public void PickObjectToPlace()
     {
         _placingObject = true;
-        _objectToPlace = Instantiate(TestObjectPrefab);
+        _objectToPlace = Instantiate(TestObjectPrefab, Vector3.up * 100, Quaternion.identity);
         _objectToPlace.transform.localRotation = Quaternion.Euler(0, _placementRotation, 0);
         _objectToPlaceScript = _objectToPlace.GetComponent<InteriorObject>();
         _mainCell = _objectToPlaceScript.ObjectCells.First(el => el.MainCell);
@@ -108,58 +108,41 @@ public class ObjectPlacement : MonoBehaviour
         if (_updateWalkableNodes == false)        
             return;
 
-        ResetNodesHighlight();
         _checkedForCollisionNodes.Clear();
         _canPlaceObject = true;
         bool objOutsideOfBounds = false;
 
         foreach (var cell in _objectToPlaceScript.ObjectCells)
         {
-            Node placemenNode = PathfindingManager.Me.NodeFromWorldPoint(_objectToPlace.transform.TransformPoint(_mainCell.CellLocalPos), BuildMode.Me.CurrentBuildGrid, true);
+            Node placemenNode = PathfindingManager.Me.NodeFromWorldPoint(_objectToPlace.transform.TransformPoint(cell.CellLocalPos), BuildMode.Me.CurrentBuildGrid, true);
             if (objOutsideOfBounds == false)
             {
-                if (Vector3.Magnitude(placemenNode.Position - _objectToPlace.transform.TransformPoint(_mainCell.CellLocalPos)) > GridInfoSORef.CellRadius)
+                if (GetDistanceFromNodeToObjectCellPos(placemenNode.Position, _objectToPlace.transform.TransformPoint(cell.CellLocalPos)) > GridInfoSORef.CellRadius)
                 {
                     objOutsideOfBounds = true;
-                    //placemenNode.DebugView.HighlightNode(DebugNodeView.HighlightMode.OccupiedNode);
                     _canPlaceObject = false;
                 }
                 else if (placemenNode.Walkable == false)
                 {
-                    //placemenNode.DebugView.HighlightNode(DebugNodeView.HighlightMode.OccupiedNode);
                     _canPlaceObject = false;
                 }
-                //else
-                //    placemenNode.DebugView.HighlightNode(DebugNodeView.HighlightMode.TargetPoint);
             }                           
             
             _checkedForCollisionNodes.Add(placemenNode);
         }
-
-        //if (objOutsideOfBounds)
-        //    foreach (var c in _checkedForCollisionNodes)
-        //        c.DebugView.HighlightNode(DebugNodeView.HighlightMode.OccupiedNode);
-
+        
         _updateWalkableNodes = false;
     }
 
-    private void ResetNodesHighlight()
+    private float GetDistanceFromNodeToObjectCellPos(Vector3 placementNodePos, Vector3 cellPos)
     {
-        foreach(var n in _checkedForCollisionNodes)
-        {
-            //if(n.Walkable)
-            //    n.DebugView.HighlightNode(DebugNodeView.HighlightMode.Walkable);
-            //else
-            //    n.DebugView.HighlightNode(DebugNodeView.HighlightMode.NonWalkable);
-        }
+        return new Vector2(placementNodePos.x - cellPos.x, placementNodePos.z - cellPos.z).magnitude;
     }
     private void PlaceObject()
     {
         foreach (var c in _checkedForCollisionNodes)
             c.Walkable = false;
-
-        ResetNodesHighlight();
-
+        
         if (UnlimitedPlacement == false)
             _placingObject = false;
         else
@@ -168,7 +151,6 @@ public class ObjectPlacement : MonoBehaviour
 
     private void DestroyPlacementObj()
     {
-        ResetNodesHighlight();
         if (_objectToPlace)
             Destroy(_objectToPlace);
     }
