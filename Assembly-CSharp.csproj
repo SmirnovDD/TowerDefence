@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\Building\Placement\ObjectCellsGenerator.cs" />
      <Compile Include="Assets\Scripts\Building\Placement\ObjectPlacement.cs" />
      <Compile Include="Assets\Scripts\Building\SO\GridInfoSO.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraControl.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>F:/Unity Projects/Tower Defense/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
