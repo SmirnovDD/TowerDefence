@@ -362,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 5.93, z: -5.92}
+  m_LocalPosition: {x: 0, y: 6, z: -5.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -380,13 +380,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2764ba0119cc94584d1efba0b3fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
+  Speed: 12
   RotateCameraLeft: 113
   RotateCameraRight: 101
   ResetCameraRotation: 114
   RotationX: 0
-  MaxHeight: 15
-  MinHeight: 5
+  MaxHeight: 7
+  MinHeight: 3
+  YAngleAtBottomPosition: 25
+  ZoomSpeed: 120
 --- !u!1 &1024353262
 GameObject:
   m_ObjectHideFlags: 0
