@@ -380,15 +380,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2764ba0119cc94584d1efba0b3fbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 12
+  Speed: 15
+  FlipScrollWheel: 0
   RotateCameraLeft: 113
   RotateCameraRight: 101
   ResetCameraRotation: 114
-  RotationX: 0
-  MaxHeight: 7
-  MinHeight: 3
+  MaxHeight: 10
+  MinHeight: 2
   YAngleAtBottomPosition: 25
-  ZoomSpeed: 120
+  ZoomSpeed: 2
+  RotationSpeed: 230
 --- !u!1 &1024353262
 GameObject:
   m_ObjectHideFlags: 0
