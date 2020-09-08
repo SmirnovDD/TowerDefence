@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-using TMPro;
 using System.Linq;
 
 public class ObjectPlacement : MonoBehaviour
 {
-    public GameObject TestObjectPrefab;
     public bool UnlimitedPlacement;
 
     public GridInfoSO GridInfoSORef;
     public Camera BuildCamera;
+    [SerializeField] private GameObject _objectToPlacePrefab;
 
     private GameObject _objectToPlace;
     private InteriorObject _objectToPlaceScript;
@@ -41,12 +40,12 @@ public class ObjectPlacement : MonoBehaviour
     public void PickObjectToPlace()
     {
         _placingObject = true;
-        _objectToPlace = Instantiate(TestObjectPrefab, Vector3.up * 100, Quaternion.identity);
+        _objectToPlace = Instantiate(_objectToPlacePrefab, Vector3.up * 100, Quaternion.identity);
         _objectToPlace.transform.localRotation = Quaternion.Euler(0, _placementRotation, 0);
         _objectToPlaceScript = _objectToPlace.GetComponent<InteriorObject>();
         _mainCell = _objectToPlaceScript.ObjectCells.First(el => el.MainCell);
         _cellToObjDisplacement = -_mainCell.CellLocalPos;
-        _objectOldPos = Vector3.down * 15; //can be anything that is not equal to mainCellPos
+        _objectOldPos = Vector3.positiveInfinity;
     }
 
     void Update()
@@ -153,5 +152,12 @@ public class ObjectPlacement : MonoBehaviour
     {
         if (_objectToPlace)
             Destroy(_objectToPlace);
+    }
+
+    public void ChangePlacementObject(GameObject placementObject)
+    {
+        DestroyPlacementObj();
+        _objectToPlacePrefab = placementObject;
+        PickObjectToPlace();
     }
 }

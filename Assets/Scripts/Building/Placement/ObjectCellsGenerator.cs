@@ -47,11 +47,11 @@ public class ObjectCellsGenerator : MonoBehaviour
         
         Vector3 xPos;
 
-        xPos = new Vector3(transform.position.x - _cellsAmmountX * GridInfoSORef.CellRadius, transform.position.y - YOffset, transform.position.z - _cellsAmmountY * GridInfoSORef.CellRadius);
+        xPos = new Vector3(transform.position.x - _cellsAmmountX * GridInfoSORef.CellRadius + GridInfoSORef.CellRadius, transform.position.y - YOffset, transform.position.z - _cellsAmmountY * GridInfoSORef.CellRadius + GridInfoSORef.CellRadius);
 
         for (int i = 0; i < _cellsAmmountX; i++)
         {
-            var pos = xPos + transform.right * GridInfoSORef.CellRadius + transform.forward * GridInfoSORef.CellRadius;
+            var pos = xPos;
             for (int j = 0; j < _cellsAmmountY; j++)
             {
                 if (mainCellInstantiated == false)
@@ -76,7 +76,7 @@ public class ObjectCellsGenerator : MonoBehaviour
 
         Gizmos.color = Color.green;
         foreach (var c in _objectCells)
-            Gizmos.DrawCube(c.CellLocalPos, new Vector3(GridInfoSORef.CellRadius * 2, 0.1f, GridInfoSORef.CellRadius * 2));
+            Gizmos.DrawCube(transform.TransformPoint(c.CellLocalPos), new Vector3(GridInfoSORef.CellRadius * 2, 0.1f, GridInfoSORef.CellRadius * 2));
     }
 
     [Serializable]

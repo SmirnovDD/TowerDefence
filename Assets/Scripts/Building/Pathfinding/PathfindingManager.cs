@@ -19,13 +19,6 @@ namespace Pathfinding
         public float SqrWaypointReachDistance = 0.03f;
         //!GRIDS PATHFINDING
 
-        //DEBUG
-        public Material DebugNodeWalkableMaterial;
-        public Material DebugNodeNonWalkableMaterial;
-        public Material DebugNodeTargetPointMaterial;
-        public Material DebugNodePathPointMaterial;
-        public Material DebugNodeOccupiedNodeMaterial;
-
         public void RegenerateGrid()
         {
             Grid.CreateGrid();
