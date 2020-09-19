@@ -28,7 +28,7 @@ public class ObjectCellsGenerator : MonoBehaviour
     private void Awake()
     {
         CreateCells();
-        GetComponentInParent<InteriorObject>().ObjectCells = _objectCells.ToArray();
+        GetComponentInParent<PlacementObject>().ObjectCells = _objectCells.ToArray();
         Destroy(gameObject);
     }
 

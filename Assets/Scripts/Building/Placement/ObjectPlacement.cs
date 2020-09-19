@@ -12,7 +12,7 @@ public class ObjectPlacement : MonoBehaviour
     [SerializeField] private GameObject _objectToPlacePrefab;
 
     private GameObject _objectToPlace;
-    private InteriorObject _objectToPlaceScript;
+    private PlacementObject _objectToPlaceScript;
     private ObjectCellsGenerator.ObjectCell _mainCell;
 
     private Vector3 _objectOldPos;
@@ -42,7 +42,7 @@ public class ObjectPlacement : MonoBehaviour
         _placingObject = true;
         _objectToPlace = Instantiate(_objectToPlacePrefab, Vector3.up * 100, Quaternion.identity);
         _objectToPlace.transform.localRotation = Quaternion.Euler(0, _placementRotation, 0);
-        _objectToPlaceScript = _objectToPlace.GetComponent<InteriorObject>();
+        _objectToPlaceScript = _objectToPlace.GetComponent<PlacementObject>();
         _mainCell = _objectToPlaceScript.ObjectCells.First(el => el.MainCell);
         _cellToObjDisplacement = -_mainCell.CellLocalPos;
         _objectOldPos = Vector3.positiveInfinity;
